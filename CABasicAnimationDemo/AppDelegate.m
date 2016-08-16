@@ -2,7 +2,7 @@
 //  AppDelegate.m
 //  CABasicAnimationDemo
 //
-//  Created by 彭永亮 on 16/8/16.
+//  Created by yongliangP on 16/8/16.
 //  Copyright © 2016年 yongliangP. All rights reserved.
 //
 

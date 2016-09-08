@@ -36,16 +36,27 @@
     //[self setUpSharkAnimation];
     
     //陀螺仪&加速器
-    [self setUpdeviceMotionAnimation];
+    //[self setUpdeviceMotionAnimation];
     
-//    //关键帧动画->使用Values
-//    [self setUpCAKeyframeAnimationUseValues];
+    //关键帧动画->使用Values
+    //[self setUpCAKeyframeAnimationUseValues];
     
     //关键帧动画->使用path
     [self setUpCAKeyframeAnimationUsePath];
-
-    // Do any additional setup after loading the view, typically from a nib.
+    
+    //关键帧动画->keyTimes演示
+    //[self setUpCAKeyframeAnimationUsekeyTimes];
+    
 }
+
+
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+
+     [self setUpCAKeyframeAnimationUsekeyTimes];
+
+}
+
 
 
 -(void)setUpdeviceMotionAnimation
@@ -124,30 +135,18 @@
 {
 
     CAKeyframeAnimation *animation = [CAKeyframeAnimation animation];
-    
     animation.keyPath = @"position";
-    
     NSValue *value1 = [NSValue valueWithCGPoint:CGPointMake(50, 50)];
-    
     NSValue *value2 = [NSValue valueWithCGPoint:CGPointMake(kWindowWidth - 50, 50)];
-    
     NSValue *value3 = [NSValue valueWithCGPoint:CGPointMake(kWindowWidth - 50, kWindowHeight-50)];
-    
     NSValue *value4 = [NSValue valueWithCGPoint:CGPointMake(50, kWindowHeight-50)];
-    
     NSValue *value5 = [NSValue valueWithCGPoint:CGPointMake(50, 50)];
-    
     animation.values = @[value1,value2,value3,value4,value5];
     animation.repeatCount = MAXFLOAT;
-    
     animation.removedOnCompletion = NO;
-    
     animation.fillMode = kCAFillModeForwards;
-    
     animation.duration = 6.0f;
-    
     animation.timingFunction=[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-    
     [self.keyButton.layer addAnimation:animation forKey:@"values"];
     
 }
@@ -156,39 +155,40 @@
 -(void)setUpCAKeyframeAnimationUsePath
 {
     CAKeyframeAnimation *animation = [CAKeyframeAnimation animation];
-    
     animation.keyPath = @"position";
-    
     CGMutablePathRef path = CGPathCreateMutable();
-    
     //矩形线路
     CGPathAddRect(path, NULL, CGRectMake(50,50, kWindowWidth - 100,kWindowHeight - 100));
-    
     animation.path=path;
-    
     CGPathRelease(path);
-    
     animation.repeatCount = MAXFLOAT;
-    
     animation.removedOnCompletion = NO;
-    
     animation.fillMode = kCAFillModeForwards;
-    
     animation.duration = 6.0f;
-    
     animation.timingFunction=[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-    
     [self.keyButton.layer addAnimation:animation forKey:@"path"];
-
 
 }
 
 
 
+-(void)setUpCAKeyframeAnimationUsekeyTimes
+{
+    
+    CAKeyframeAnimation *animation = [CAKeyframeAnimation animation];
+//    animation.keyPath = @"transform.translation.x";
+    animation.keyPath = @"position.x";
+    animation.values = @[@0, @20, @-20, @20, @0];
+    animation.keyTimes = @[ @0, @(1 / 6.0), @(3 / 6.0), @(5 / 6.0), @1 ];
+    animation.duration = 0.5;
+    animation.additive = YES;
+    [self.sharkTagButton.layer addAnimation:animation forKey:@"keyTimes"];
+
+}
 
 
-
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }

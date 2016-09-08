@@ -9,9 +9,13 @@
 #import "ViewController.h"
 #import <CoreMotion/CoreMotion.h>
 
+#define kWindowWidth  [UIScreen mainScreen].bounds.size.width
+#define kWindowHeight [UIScreen mainScreen].bounds.size.height
+
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet UIButton *sharkTagButton;
 @property (weak, nonatomic) IBOutlet UIButton *alphaTagButton;
+@property (weak, nonatomic) IBOutlet UIButton *keyButton;
 
 //@property (weak, nonatomic) IBOutlet UIButton *alphaTagButton;
 
@@ -34,6 +38,12 @@
     //陀螺仪&加速器
     [self setUpdeviceMotionAnimation];
     
+//    //关键帧动画->使用Values
+//    [self setUpCAKeyframeAnimationUseValues];
+    
+    //关键帧动画->使用path
+    [self setUpCAKeyframeAnimationUsePath];
+
     // Do any additional setup after loading the view, typically from a nib.
 }
 
@@ -43,10 +53,7 @@
     self.motionManager = [[CMMotionManager alloc] init];
     self.motionManager.deviceMotionUpdateInterval = 1.0f/100.0f; //1秒100次
     self.sharkTagButton.layer.anchorPoint = CGPointMake(0.5, 0);
-    
     [self.motionManager startDeviceMotionUpdatesToQueue:[NSOperationQueue currentQueue] withHandler:^(CMDeviceMotion *motion, NSError *error) {
-        
-        
         if(fabs(motion.attitude.roll)<1.0f)
         {
             [UIView animateWithDuration:0.6 animations:^{
@@ -66,9 +73,7 @@
                 }
                 self.sharkTagButton.layer.transform = CATransform3DMakeRotation(s*M_PI_2, 0, 0, 1);
             }];
-            
         }
-        
         if ((motion.attitude.pitch)<0)
         {
             [UIView animateWithDuration:0.6 animations:^{
@@ -77,8 +82,7 @@
         }
         
     }];
-
-
+    
 }
 
 
@@ -112,8 +116,73 @@
     rotationAnimation.autoreverses = YES;
     rotationAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
     rotationAnimation.fillMode = kCAFillModeForwards;
-    [self.sharkTagButton.layer addAnimation:rotationAnimation forKey:@"revItUpAnimation"];
+    [self.sharkTagButton.layer addAnimation:rotationAnimation forKey:@"shark"];
 }
+
+
+-(void)setUpCAKeyframeAnimationUseValues
+{
+
+    CAKeyframeAnimation *animation = [CAKeyframeAnimation animation];
+    
+    animation.keyPath = @"position";
+    
+    NSValue *value1 = [NSValue valueWithCGPoint:CGPointMake(50, 50)];
+    
+    NSValue *value2 = [NSValue valueWithCGPoint:CGPointMake(kWindowWidth - 50, 50)];
+    
+    NSValue *value3 = [NSValue valueWithCGPoint:CGPointMake(kWindowWidth - 50, kWindowHeight-50)];
+    
+    NSValue *value4 = [NSValue valueWithCGPoint:CGPointMake(50, kWindowHeight-50)];
+    
+    NSValue *value5 = [NSValue valueWithCGPoint:CGPointMake(50, 50)];
+    
+    animation.values = @[value1,value2,value3,value4,value5];
+    animation.repeatCount = MAXFLOAT;
+    
+    animation.removedOnCompletion = NO;
+    
+    animation.fillMode = kCAFillModeForwards;
+    
+    animation.duration = 6.0f;
+    
+    animation.timingFunction=[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    
+    [self.keyButton.layer addAnimation:animation forKey:@"values"];
+    
+}
+
+
+-(void)setUpCAKeyframeAnimationUsePath
+{
+    CAKeyframeAnimation *animation = [CAKeyframeAnimation animation];
+    
+    animation.keyPath = @"position";
+    
+    CGMutablePathRef path = CGPathCreateMutable();
+    
+    //矩形线路
+    CGPathAddRect(path, NULL, CGRectMake(50,50, kWindowWidth - 100,kWindowHeight - 100));
+    
+    animation.path=path;
+    
+    CGPathRelease(path);
+    
+    animation.repeatCount = MAXFLOAT;
+    
+    animation.removedOnCompletion = NO;
+    
+    animation.fillMode = kCAFillModeForwards;
+    
+    animation.duration = 6.0f;
+    
+    animation.timingFunction=[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    
+    [self.keyButton.layer addAnimation:animation forKey:@"path"];
+
+
+}
+
 
 
 

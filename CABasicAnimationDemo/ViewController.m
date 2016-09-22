@@ -208,7 +208,7 @@
     group.removedOnCompletion = NO;
     group.repeatCount = MAXFLOAT;
     
-    group.animations = @[animationScale,animationScale];
+    group.animations = @[animationScale,animationRota];
     [self.groupButton.layer addAnimation:group forKey:nil];
     
 }

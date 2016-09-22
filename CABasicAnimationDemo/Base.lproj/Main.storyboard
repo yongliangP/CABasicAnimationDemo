@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -14,11 +15,10 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uW0-5i-fx4">
-                                <rect key="frame" x="288" y="289" width="24" height="22"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="24" id="K1d-MU-qMC"/>
                                 </constraints>
@@ -26,12 +26,10 @@
                                 <state key="normal" title="Button" image="tag1"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nOs-HE-EII">
-                                <rect key="frame" x="422" y="120" width="78" height="24"/>
                                 <state key="normal" title="Button" image="tag_d"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9mO-pd-cP2">
-                                <rect key="frame" x="285" y="159" width="30" height="30"/>
-                                <color key="backgroundColor" red="0.36078431370000003" green="0.81568627449999997" blue="0.76078431369999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.81568627449999997" blue="0.76078431369999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="BaQ-4K-4uf"/>
                                     <constraint firstAttribute="width" constant="30" id="kv6-RT-WID"/>
@@ -42,25 +40,33 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E81-0D-Tyx">
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.81568627449999997" blue="0.76078431369999999" alpha="1" colorSpace="calibratedRGB"/>
+                            </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="nOs-HE-EII" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="100" id="6MC-pL-89Q"/>
                             <constraint firstItem="uW0-5i-fx4" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Bcw-tV-Dol"/>
                             <constraint firstItem="uW0-5i-fx4" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="CCb-Sf-bWz"/>
+                            <constraint firstAttribute="trailing" secondItem="E81-0D-Tyx" secondAttribute="trailing" constant="100" id="Fv6-US-gC3"/>
                             <constraint firstAttribute="trailing" secondItem="nOs-HE-EII" secondAttribute="trailing" constant="100" id="LQB-Qh-qvI"/>
-                            <constraint firstItem="nOs-HE-EII" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="100" id="YGZ-ba-LCM"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="E81-0D-Tyx" secondAttribute="bottom" constant="100" id="WXL-zY-npj"/>
                             <constraint firstItem="uW0-5i-fx4" firstAttribute="top" secondItem="9mO-pd-cP2" secondAttribute="bottom" constant="100" id="dfF-f1-a5z"/>
+                            <constraint firstItem="E81-0D-Tyx" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="100" id="otp-dI-Zzg"/>
                             <constraint firstItem="9mO-pd-cP2" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="xOQ-S4-h9s"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="alphaTagButton" destination="nOs-HE-EII" id="B85-dS-98Q"/>
+                        <outlet property="groupButton" destination="E81-0D-Tyx" id="g5f-wc-DPv"/>
                         <outlet property="keyButton" destination="9mO-pd-cP2" id="10m-yB-qYz"/>
                         <outlet property="sharkTagButton" destination="uW0-5i-fx4" id="76g-fp-l4v"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="136.80000000000001" y="137.18140929535232"/>
         </scene>
     </scenes>
     <resources>

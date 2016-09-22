@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *sharkTagButton;
 @property (weak, nonatomic) IBOutlet UIButton *alphaTagButton;
 @property (weak, nonatomic) IBOutlet UIButton *keyButton;
+@property (weak, nonatomic) IBOutlet UIButton *groupButton;
 
 //@property (weak, nonatomic) IBOutlet UIButton *alphaTagButton;
 
@@ -46,6 +47,9 @@
     
     //关键帧动画->keyTimes演示
     //[self setUpCAKeyframeAnimationUsekeyTimes];
+    
+    //组动画
+    [self setUpAnimationGroup];
     
 }
 
@@ -184,6 +188,29 @@
     animation.additive = YES;
     [self.sharkTagButton.layer addAnimation:animation forKey:@"keyTimes"];
 
+}
+
+
+-(void)setUpAnimationGroup
+{
+
+    CABasicAnimation * animationScale = [CABasicAnimation animation];
+    animationScale.keyPath = @"transform.scale";
+    animationScale.toValue = @(0.1);
+    
+    CABasicAnimation *animationRota = [CABasicAnimation animation];
+    animationRota.keyPath = @"transform.rotation";
+    animationRota.toValue = @(M_PI_2);
+    
+    CAAnimationGroup * group = [[CAAnimationGroup alloc] init];
+    group.duration = 3.0;
+    group.fillMode = kCAFillModeForwards;
+    group.removedOnCompletion = NO;
+    group.repeatCount = MAXFLOAT;
+    
+    group.animations = @[animationScale,animationScale];
+    [self.groupButton.layer addAnimation:group forKey:nil];
+    
 }
 
 
